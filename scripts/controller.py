@@ -2,13 +2,14 @@
 
 # imports ROS for developing the node
 import rospy
-
 from turtlesim.msg import Pose
+
 # for conversions that may be necessary 
 import math
 
 # imports geometry/msgs/Twist for control commands
 from geometry_msgs.msg import Twist
+
 # imports controller for turtle
 from robotics_lab1.msg import Turtlecontrol
 
@@ -16,14 +17,14 @@ pos_msg = Pose()
 cont_msg = Turtlecontrol()
 
 # defining a subscriber callback function
-def pose_callback(data):
-    global pos_msg
-    pos_msg = data
-
-# defining a subscriber callback function
 def control_callback(data):
     global cont_msg
     cont_msg = data
+
+# defining a subscriber callback function
+def pose_callback(data):
+    global pos_msg
+    pos_msg = data
 
 if __name__ == '__main__':
 	# initializes the node
@@ -44,9 +45,8 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
     	# Proportional controller equation
         vel_msg.linear.x = cont_msg.kp * (cont_msg.xd - pos_msg.x)
-        print(cont_msg.xd)
-        print(cont_msg.kp)
-        print(cont_msg.xd - pos_msg.x)
-        print("")
+        cont_msg.xd
+        cont_msg.kp
+        cont_msg.xd - pos_msg.x
         velocity_publisher.publish(vel_msg)
         loop_rate.sleep()

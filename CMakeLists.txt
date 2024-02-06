@@ -9,7 +9,7 @@ project(robotics_lab1)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
-  roscpp
+  #roscpp
   rospy
   std_msgs
   turtlesim
@@ -109,7 +109,8 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES robotics_lab1
-CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs turtlesim message_runtime
+# roscpp taken out from below
+CATKIN_DEPENDS geometry_msgs rospy std_msgs turtlesim message_runtime
 #  DEPENDS system_lib
 )
 

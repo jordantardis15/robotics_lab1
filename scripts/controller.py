@@ -13,7 +13,7 @@ from geometry_msgs.msg import Twist
 from robotics_lab1.msg import Turtlecontrol
 
 pos_msg = Pose()
-ctrl_msg = Turtlecontrol()
+cont_msg = Turtlecontrol()
 
 # defining a subscriber callback function
 def pose_callback(data):
@@ -22,8 +22,8 @@ def pose_callback(data):
 
 # defining a subscriber callback function
 def control_callback(data):
-    global ctrl_msg
-    ctrl_msg = data
+    global cont_msg
+    cont_msg = data
 
 if __name__ == '__main__':
 	# initializes the node
@@ -42,10 +42,11 @@ if __name__ == '__main__':
 
 	# run this control loop regularly
     while not rospy.is_shutdown():
-        vel_msg.linear.x = ctrl_msg.kp * (ctrl_msg.xd - pos_msg.x)
-        print(ctrl_msg.xd)
-        print(ctrl_msg.kp)
-        print(ctrl_msg.xd - pos_msg.x)
+    	# Proportional controller equation
+        vel_msg.linear.x = cont_msg.kp * (cont_msg.xd - pos_msg.x)
+        print(cont_msg.xd)
+        print(cont_msg.kp)
+        print(cont_msg.xd - pos_msg.x)
         print("")
         velocity_publisher.publish(vel_msg)
         loop_rate.sleep()
